@@ -133,7 +133,7 @@ variable located-bottom \ last line to display with l
 \    input-lexeme @ located-len ! current-sourceview located-view ! ;
 
 :noname ( y1 .. ym error/0 -- y1 .. ym / z1 .. zn error ) \ exception
-    ?DUP-IF
+    DUP IF
 	[ here throw-entry ! ]
 	first-throw @ 0< IF
 	    store-backtrace
@@ -142,7 +142,8 @@ variable located-bottom \ last line to display with l
 	    fast-throw THEN
 	>stderr cr ." uncaught exception: " .error cr
 	kill-task  2 (bye)
-    THEN ;
+    THEN
+    drop ;
 is throw
 
 0 [if]

@@ -791,7 +791,7 @@ Create callback-&style c-var c,
 : c-hash-ok? ( -- addr1 addr2 flag )
     [: ." gflibcc_hash_" lib-modulename $. ;] $tmp
     lib-handle lib-sym
-    ?dup-IF  c-source-hash 2dup $10 tuck str=  ELSE  0 0 false  THEN ;
+    dup IF  c-source-hash 2dup $10 tuck str=  ELSE  drop 0 0 false  THEN ;
 
 : .xx ( n -- ) 0 [: <<# # # #> type #>> ;] $10 base-execute ;
 : .hashxx ( addr u -- ) bounds DO  I c@ .xx  LOOP ;

@@ -108,13 +108,12 @@ Variable vt100-modifier \ shift, ctrl, alt
     edit-update false ;
 
 : hist-pos    ( -- ud )
-    history ?dup-IF  file-position drop  ELSE  backward^ 2@  THEN ;
+    history dup IF  file-position drop  ELSE drop backward^ 2@  THEN ;
 : hist-setpos ( ud -- )
-    history ?dup-IF  reposition-file drop  ELSE  2drop  THEN ;
+    history dup IF  reposition-file drop  ELSE  drop 2drop  THEN ;
 
 : get-line ( addr len -- len' flag )
-    swap history ?dup-IF  read-line throw
-    ELSE  2drop 0 false  THEN ;
+    swap history dup IF  read-line throw  ELSE  drop 2drop 0 false  THEN ;
 
 : next-line  ( max span addr pos1 -- max span addr pos2 false )
   clear-line
@@ -151,9 +150,9 @@ $10 buffer: thisline#
 	2dup lastline<>  IF
 	    end^ 2@ hist-setpos
 	    history
-	    ?dup-IF  write-line drop
+	    dup IF  write-line drop
 		history flush-file drop \ don't worry about errors
-	    ELSE  2drop  THEN
+	    ELSE drop 2drop  THEN
 	    hist-pos 2dup backward^ 2! end^ 2!
 	    EXIT
 	ELSE
@@ -214,11 +213,11 @@ Create prefix-found  0 , 0 ,
 : prefix-off ( -- )  0 0 prefix-found 2! ;
 
 : prefix-string ( addr len nfa -- addr' len' )
-    dup prefix-found !  ?dup-IF
+    dup prefix-found !  dup IF
 	name>string rot /string rot drop
 	dup 1+ prefix-found cell+ !
     ELSE
-	2drop s" " prefix-off
+	drop 2drop s" " prefix-off
     THEN ;
 
 Defer search-prefix
@@ -525,12 +524,13 @@ xchar-history
 
 : get-history ( addr len -- )
     ['] force-open catch-nobt
-    ?dup-if
+    dup if
 	\ !! >stderr
         \ history-file type ." : " .error cr
 	drop 2drop 0 to history
     else
-	to history
+        drop
+        to history
 	history file-size throw
 	2dup forward^ 2! 2dup backward^ 2! end^ 2!
     endif

@@ -327,7 +327,7 @@ set-current
 \ scrolling etc: (thanks to Ulrich Hoffmann)
 
 : (control-sequence) ( u char -- )
-    ?dup-IF  .\" \e[" swap 0 dec.r emit  ELSE  #esc emit 0 dec.r  THEN ;
+    dup IF  .\" \e[" swap 0 dec.r emit  ELSE  drop #esc emit 0 dec.r  THEN ;
 
 ' (control-sequence) IS control-sequence
 

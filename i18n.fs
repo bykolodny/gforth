@@ -111,7 +111,7 @@ locales:default
     current-execute here $[]saved 0 ,
     latest name>string '_' -scan dup IF
 	['] locales >wordlist find-name-in
-	?dup-IF name>interpret >body ELSE `locales:default THEN
+	dup IF name>interpret >body ELSE drop `locales:default THEN
     ELSE 2drop `locales:default THEN ,
   DOES> to locale ;
 
@@ -140,8 +140,11 @@ locales:default
     \G If the variant is not available, falls back to the language.
     locales:default
     BEGIN  2dup ['] locales >wordlist find-name-in
-	?dup-IF  execute 2drop EXIT  THEN
-    '_' -scan dup 0= UNTIL  2drop ;
+        dup IF
+            execute 2drop EXIT  THEN
+        drop
+    '_' -scan dup 0= UNTIL
+    2drop ;
 
 \ CSV reader part
 

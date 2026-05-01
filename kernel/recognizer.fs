@@ -165,10 +165,15 @@ Defer ?warn#  ' noop is ?warn#
     \G Push @i{x} to top of @i{stack}.
     dup >r $@len cell+ r@ $!len
     r> $@ + cell- ! ;
+
 : stack> ( stack -- x ) \ gforth-experimental stack-from
     \G Pop item @i{x} from top of @i{stack}.
-    dup >r $@ ?dup-IF  + cell- @ r@ $@len cell- r> $!len
-    ELSE  drop rdrop  THEN ;
+    dup >r $@ dup IF
+        + cell- @ r@ $@len cell- r> $!len
+    ELSE
+        2drop rdrop
+    THEN ;
+
 : stack# ( stack -- elements )
     $@len cell/ ;
 

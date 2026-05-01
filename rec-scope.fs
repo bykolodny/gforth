@@ -62,16 +62,18 @@ action-of rec-forth set-stack
     [: set-current ' execute ;] current-execute ;
 
 : ?search-prefix ( addr len wid/0 -- addr' len' )
-    ?dup-IF
+    dup IF
 	wordlist-id @ 0 search-voc prefix-string
-    ELSE   simple-search-prefix  THEN ;
+    ELSE
+        drop simple-search-prefix
+    THEN ;
 
 : scope-search-prefix ( addr1 len1 -- addr2 len2 )
     0  BEGIN >r
 	2dup ':' $split nosplit? IF
 	    2drop 2drop r> ?search-prefix  EXIT
 	THEN
-	2swap r> ?dup-0=-IF  ['] search-order  THEN  execute  WHILE
+	2swap r> dup 0= IF  drop ['] search-order  THEN  execute  WHILE
 	    dup >does-code [ ' forth >does-code ]L =  WHILE
 		>wordlist >r 2nip r>  REPEAT  drop  THEN
     2drop simple-search-prefix ;

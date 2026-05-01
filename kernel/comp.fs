@@ -328,9 +328,9 @@ Defer addr>view
 :noname ( ip-addr -- view / 0 )
     \G give @i{view} information for instruction address @i{ip-addr}
     dup section-start @ section-dp @ 1+ within
-    section-start @ and ?dup-IF
+    section-start @ and dup IF
 	- cell/ 1- locs[] $[] @  EXIT
-    THEN  drop 0 ; is addr>view
+    THEN  2drop 0 ; is addr>view
 ' addr>view alias name>view ( nt -- view / 0 )
 \G give @i{view} information for name token @i{nt}
 

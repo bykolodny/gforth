@@ -629,9 +629,9 @@ included-files $[]# 1- constant doc-file#
         rdrop 2drop basic-help exit then
     drop 0 parse + over - -trailing 2dup s" ::" string-suffix? if
         rdrop 2 - help-section exit then
-    r@ >in ! parse-name 2dup (view') ?dup-if
+    r@ >in ! parse-name 2dup (view') dup if
         rdrop nip nip name>string help-word 2drop exit then
-    2drop r> >in ! 0 parse 2drop 2drop
+    drop 2drop r> >in ! 0 parse 2drop 2drop
     error-color ." Not a section or word" default-color ;
 
 \ whereg

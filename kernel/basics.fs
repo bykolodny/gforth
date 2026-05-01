@@ -259,12 +259,13 @@ defer throw ( y1 .. ym nerror -- y1 .. ym / z1 .. zn nerror ) \ exception
 \G the stacks accordingly, and push @i{nerror}.
 
 :noname ( y1 .. ym error -- y1 .. ym / z1 .. zn error )
-    ?dup-if
+    dup if
 	[ here throw-entry ! ]
 	cr dup >r DoError cr
 	[ has? file [IF] ] script? IF  r> (bye)  ELSE  quit  THEN
 	[ [ELSE] ] quit [ [THEN] ]
-    then ;
+    then
+    drop ;
 is throw
 [THEN]
 

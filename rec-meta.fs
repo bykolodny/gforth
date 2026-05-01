@@ -28,10 +28,9 @@
 
     '?' $split dup 0= IF  2drop
     ELSE
-	2swap [: ." rec-" type ;] $tmp find-name ?dup-IF
-	    name?int execute  EXIT
-	THEN
-    THEN
+	2swap [: ." rec-" type ;] $tmp find-name dup IF
+	    name?int execute  EXIT THEN
+        drop THEN
     rec-none ;
 
 ' rec-meta action-of rec-forth >back

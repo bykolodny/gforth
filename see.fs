@@ -131,10 +131,10 @@ definitions
 : next-head ( addr1 -- addr2 ) \ gforth-internal
     \G find the next header starting after addr1, up to here (unreliable).
     [ cell body> ] Literal +
-    dup which-section? ?dup-IF
+    dup which-section? dup IF
 	[: section-dp @ (next-head) ;] swap section-execute
     ELSE
-	here (next-head)
+	drop here (next-head)
     THEN ;
 
 : next-prim ( addr1 -- addr2 ) \ gforth-internal
@@ -692,10 +692,10 @@ VARIABLE Branches
 	    0 over 2@
 	    [: ['] search-u#gen swap traverse-wordlist ;] map-vocs
 	    2drop
-	    ?dup-IF
+	    dup IF
 		>name name>string ['] Com-color .string bl cemit
 		2 th EXIT  THEN
-	    u#what @ name>string ['] Com-color .string bl cemit
+	    drop u#what @ name>string ['] Com-color .string bl cemit
 	    dup @ c-. cell+ dup @ c-. cell+
 	ELSE  2 th  THEN ;
 
@@ -721,8 +721,10 @@ VARIABLE Branches
 	    0 over @
 	    r@ map-vocs drop
 	    display? IF
-		?dup-IF  name>string ['] Com-color .string bl cemit
-		ELSE  r> 2r@ ['] Com-color .string >r
+                dup IF
+                    name>string ['] Com-color .string bl cemit
+                ELSE
+                    drop r> 2r@ ['] Com-color .string >r
 		    dup @ c-. bl cemit
 		THEN
 	    THEN
@@ -903,10 +905,10 @@ c-extender !
 : seedefer ( xt -- )
     dup >body @ xt-see-xt cr
     dup s" Defer" .defname cr
-    >name ?dup-if
+    >name dup if
 	." IS " id. cr
     else
-	." latestxt >body !"
+	drop ." latestxt >body !"
     then ;
 :is see-threaded ( addr -- )
     C-Pass @ DebugMode = IF
@@ -930,10 +932,10 @@ c-extender !
 : seeumethod ( xt -- )
     dup s" umethod" .defname cr
     dup defer@ xt-see-xt cr
-    >name ?dup-if
+    >name dup if
 	." IS " id. cr
     else
-	." latestxt >body !"
+	drop ." latestxt >body !"
     then ;
 : umethod? ( xt -- flag )
     >body dup @decompile-prim ['] u#exec xt= swap
