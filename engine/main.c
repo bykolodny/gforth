@@ -1551,7 +1551,7 @@ static int reserve_code_space(UCell size)
     }
     next_code_blockp = &(p->next);
   } else {
-    debugp(stderr, "Don't reserve code size %ld, code_area=%p, code_ares_size=%ld, code_here=%p\n", size, code_area, code_area_size, code_here);
+    /* debugp(stderr, "Don't reserve code size %ld, code_area=%p, code_ares_size=%ld, code_here=%p\n", size, code_area, code_area_size, code_here); */
   }
   return 0;
 }
