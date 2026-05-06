@@ -115,25 +115,6 @@ tex: color-tex
 ?: le-l, ( n -- )  lle here 4 allot l! ;
 ?: be-l, ( n -- )  lbe here 4 allot l! ;
 
-Create color-matrix \ vt100 colors
-\ RGBA, but this is little endian, so write ABGR ,
-$ff000000 le-l, \ Black
-$ff3030ff le-l, \ Red
-$ff20ff20 le-l, \ Green
-$ff00ffff le-l, \ Yellow
-$ffff6020 le-l, \ Blue - complete blue is too dark
-$ffff00ff le-l, \ Magenta
-$ffffff00 le-l, \ Cyan
-$ffffffff le-l, \ White
-$ff404040 le-l, \ dimm Black
-$ff4040bf le-l, \ dimm Red
-$ff40bf40 le-l, \ dimm Green
-$ff40bfbf le-l, \ dimm Yellow
-$ffbf4040 le-l, \ dimm Blue
-$ffbf40bf le-l, \ dimm Magenta
-$ffbfbf40 le-l, \ dimm Cyan
-$ffbfbfbf le-l, \ dimm White
-
 1 Value colorschemes
 43 Value colorscheme#
 

@@ -540,6 +540,7 @@ k-f10	XKB_KEY_F10 >xkb-key !
 k-f11	XKB_KEY_F12 >xkb-key !
 k-f12	XKB_KEY_F12 >xkb-key !
 k-pause	XKB_KEY_Pause >xkb-key !
+k-sel   XKB_KEY_Select >xkb-key !
 
 : search-ekey ( key nt -- xt key flag )
     2dup @ = IF  rot drop swap false  ELSE  drop true  THEN ;
