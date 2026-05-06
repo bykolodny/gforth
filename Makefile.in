@@ -1725,6 +1725,8 @@ pdf ebook dvi txt ps html info: $(GFORTH_TEXI) $(VMGEN_TEXI) doc/Makefile
 		@echo MAKEDOC $@
 		-cd doc; $(MAKE) -j1 $@
 
+doc/vmgen.pdf doc/gforth.pdf: pdf
+
 .PHONY: doc
 doc:		info html ps pdf txt
 

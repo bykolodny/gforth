@@ -276,6 +276,7 @@ add-ldflags
 add-lib
 add-lib
 add-libpath
+add-prefix
 .addr.
 >addr
 ?addr
@@ -1221,6 +1222,7 @@ decl,
 decl,
 decode
 decode-pos
+decode-string-literal
 decode-view
 @decompile-prim
 decompile-prim3
@@ -4331,6 +4333,7 @@ prefix-found
 prefix-number
 prefix-off
 prefix-string
+prefix-table
 preopen-path-lib
 prepare-cb#
 prepare-for-dump
@@ -4482,6 +4485,7 @@ rec-float
 rec-forth
 rec-forth-nt?
 ?rec-found
+rec-id.
 rec-kernel
 rec-level
 rec-local
@@ -4496,6 +4500,7 @@ rec-number-kernel
 recognize
 .recognizer-sequence
 record-name
+rec-prefix
 recs
 rec-scope
 rec-sequence:
@@ -5875,6 +5880,7 @@ uncolored-mode
 under+
 Underline
 un-dquote
+(unescape)
 unescape
 !!unfinished!!
 unfixed-forward
